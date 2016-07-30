@@ -23,10 +23,8 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     add_definitions(-Wall -ansi -Wno-deprecated -pthread -std=c++11)
 endif()
 
-if(MSVC)
-    #vc 2012 fix for vararg templates
-    set(MSVC_COMPILER_DEFS "-D_VARIADIC_MAX=10")
-endif() 
+set(CMAKE_BUILD_TYPE Debug)
+
 #-------------------
 # set common include folder for module
 #-------------------
@@ -57,7 +55,6 @@ else()
   file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
   add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES})
   add_dependencies(${PROJECT_TEST_NAME} googletest)
-  
   
   if(NOT WIN32 OR MINGW)
       target_link_libraries(${PROJECT_TEST_NAME}
