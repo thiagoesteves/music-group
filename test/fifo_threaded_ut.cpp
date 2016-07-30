@@ -19,8 +19,8 @@ typedef struct {
 
 // This function consumes the food
 void run_thread(Fifo<task_t>* fifo, int id, task_t* task) {
+  (void)(id);
   fifo->pop(task);
-  //std::cout << "Thread: " << id << " food: " << task->food << std::endl;
   return;
 }
 

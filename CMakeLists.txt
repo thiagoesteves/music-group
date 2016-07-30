@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.8)
 # Options 'cmake -Dtest=ON'.
 option(test "Build test target" OFF) # Makes 'test' available
 
-set(PROJECT_NAME_STR music-group)
+set(PROJECT_NAME_STR music-group-debug)
 project(${PROJECT_NAME_STR} C CXX)
 
 include(CheckCXXCompilerFlag)
@@ -37,7 +37,7 @@ if (NOT test)
 
   include_directories(${COMMON_INCLUDES})
   add_executable(${PROJECT_NAME_STR} ${PROJECT_SOURCE_DIR}/src/main.cpp)
-  target_link_libraries(${PROJECT_NAME_STR} ${CMAKE_THREAD_LIBS_INIT})
+  target_link_libraries(${PROJECT_NAME_STR} -Wl,--no-as-needed ${CMAKE_THREAD_LIBS_INIT})
 
 #-------------------
 # Test target
