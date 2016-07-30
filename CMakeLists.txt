@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.8)
 # Options 'cmake -Dtest=ON'.
 option(test "Build test target" OFF) # Makes 'test' available
 
-set(PROJECT_NAME_STR music-group-stack)
+set(PROJECT_NAME_STR music-group)
 project(${PROJECT_NAME_STR} C CXX)
 
 include(CheckCXXCompilerFlag)
@@ -49,7 +49,7 @@ else()
 
   add_definitions(${MSVC_COMPILER_DEFS})
   enable_testing()
-  set(PROJECT_TEST_NAME ${PROJECT_NAME_STR}-gtest)
+  set(PROJECT_TEST_NAME ${PROJECT_NAME_STR}-test)
   include_directories(${GTEST_INCLUDE_DIRS} ${COMMON_INCLUDES})
   
   file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
