@@ -8,7 +8,7 @@ using namespace ::music_group;
 
 const int max_threads =10;
 const int max_elements=max_threads+1;  // For debug purpose, max_elements>max_threads
-const char food_to_consume[]="banana";
+const std::string food_to_consume="banana";
 
 /**
  * @brief This struct is the type that will be produced
@@ -73,7 +73,7 @@ TEST_F(FifoThreadedTest, Test_Empty_Pop_Push_With_Thread) {
   }
 
   for (int id = 0; id < max_threads; id++) {
-    ASSERT_STREQ(food_to_consume, producer[id].food.c_str());
+    ASSERT_EQ(food_to_consume, producer[id].food);
   }
 }
 
@@ -115,7 +115,7 @@ TEST_F(FifoThreadedTest, Test_Push_Pop_With_Thread) {
   }
 
   for (int id = 0; id < max_elements; id++) {
-    ASSERT_STREQ(food_to_consume, producer[id].food.c_str());
+    ASSERT_EQ(food_to_consume, producer[id].food);
   }
 }
 
@@ -146,7 +146,7 @@ TEST_F(FifoThreadedTest, Test_Pop_Push_Pop_Try_With_Thread) {
 
   pop_try_consumer.food.clear();
   ASSERT_EQ(ERROR_FAIL, fifo_->pop_try(&pop_try_consumer));
-  ASSERT_STRNE(food_to_consume, pop_try_consumer.food.c_str());
+  ASSERT_NE(food_to_consume, pop_try_consumer.food);
 
   for (int i=0; i<(max_threads+1); i++) {
     producer[i].food = food_to_consume;
@@ -160,7 +160,7 @@ TEST_F(FifoThreadedTest, Test_Pop_Push_Pop_Try_With_Thread) {
   ASSERT_EQ(ERROR_OK, fifo_->pop_try(&pop_try_consumer));
 
   for (int id = 0; id < max_threads; id++) {
-    ASSERT_STREQ(food_to_consume, producer[id].food.c_str());
+    ASSERT_EQ(food_to_consume, producer[id].food);
   }
-  ASSERT_STREQ(food_to_consume, pop_try_consumer.food.c_str());
+  ASSERT_EQ(food_to_consume, pop_try_consumer.food);
 }

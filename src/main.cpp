@@ -60,7 +60,7 @@ void monkey(Fifo<packet_t>* fifo, int id, bool* feeded) {
   do {
     // The horse is patient and wait its turn
     packet_t my;
-    result = fifo->pop(&my);
+    result = fifo->pop_try(&my);
     if ((ERROR_OK == result) && (my.food == monkey_food)) {
       cout << "Desperate Monkey: " << id << " have eaten. " << endl;
       break;
